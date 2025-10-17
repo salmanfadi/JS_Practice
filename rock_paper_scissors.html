@@ -26,15 +26,23 @@
             border-radius: 60px ;
             margin-bottom: 50px;
           }
+          #arena{
+            font-weight: bold;
+            font-size: 30px;
+          }
         </style>
     </head>
     <body>
         <h1 class="title"> ROCK PAPER SCISSORS</h1>
-        <h2 id="holder">I Choose</h2> <br>
+        <br>
 
-        <button id="Rock" onclick="play('Rock')" class="button"><img src="rock-emoji.png" alt="" class="icon"></button>
-        <button id="Paper" onclick="play('Paper')" class="button"><img src="paper-emoji.png" alt="" class="icon"></button>
-        <button id="Scissors" onclick="play('Scissors')" class="button"><img src="scissors-emoji.png" alt="" class="icon"></button>
+        <button id="Rock" onclick="play('Rock')" class="button"><img src="images/rock-emoji.png" alt="" class="icon"></button>
+        <button id="Paper" onclick="play('Paper')" class="button"><img src="images/paper-emoji.png" alt="" class="icon"></button>
+        <button id="Scissors" onclick="play('Scissors')" class="button"><img src="images/scissors-emoji.png" alt="" class="icon"></button>
+        <br>
+        <div id="arena">You chose <div id="Uchoise"></div>    <div id="CChoise"></div> Computer Chose
+        <p id="result"></p>
+        </div>
         <br>
         <button id="Show" onclick="show()">Show score</button>
         <button id="Reset" onclick="reset()">Reset score</button>
@@ -50,24 +58,31 @@
                 const computerChoice = choices[Math.floor(Math.random() * choices.length)];
                 let result = "";
                 if(UserChoise == computerChoice){
-                    result = `I choose ${computerChoice} , Tie`;
+                    result = `It is a Tie`;
                     score.tie += 1;
                     localStorage.setItem('score',JSON.stringify(score));
                 }
                 else if((UserChoise == "Rock" && computerChoice == "Paper") ||
                 (UserChoise == "Paper" && computerChoice == "Scissors") ||
                 (UserChoise == "Scissors" && computerChoice == "Rock")){
-                    result = `I choose ${computerChoice} , Loose`;
+                    result = `You Loose`;
                     score.loses += 1;
                     localStorage.setItem('score',JSON.stringify(score));
                 }
                 else{
-                    result = `I choose ${computerChoice} , Win`;
+                    result = `You Win`;
                     score.wins += 1;
                     localStorage.setItem('score',JSON.stringify(score));
                 }
+                
+                let fig1 = fetchImage(UserChoise);
+                let fig2 = fetchImage(computerChoice);
 
-                document.getElementById('holder').innerHTML=result;
+                let Udiv = document.getElementById('Uchoise');
+                let Cdiv = document.getElementById('CChoise');
+                Udiv.innerHTML = fig1;
+                Cdiv.innerHTML = fig2;
+                document.getElementById('result').innerHTML = result;
             }
             function show(){
                 alert(`Your Score: ${score.wins}  ,  Computer Score: ${score.loses}`)
@@ -78,6 +93,17 @@
                 score.tie = 0;
                 localStorage.removeItem('score');
                 alert("Scores has been reset.")
+            }
+            function fetchImage(choice){
+              let image = '';
+              if(choice == "Rock"){
+                image =  '<img src="images/rock-emoji.png" alt="" class="icon">';
+              }else if(choice == "Paper"){
+                image =  '<img src="images/paper-emoji.png" alt="" class="icon">';
+              }else{
+                image =  '<img src="images/scissors-emoji.png" alt="" class="icon">';
+              }
+              return image;
             }
         </script>
     </body>
