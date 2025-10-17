@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The Window Object</h1>
+<h2>The setInterval() Method</h2>
+
+<p id="demo"></p>
+
+<script>
+setInterval(displayHello, 100);
+
+function displayHello() {
+  const vars = ["rock", "paper", "scissor"]
+  const result = Math.floor(Math.random() * vars.length);
+  document.getElementById("demo").innerHTML = vars[result];
+  
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Amazon Shipping Calculator</title>
+    <style>
+      .cost-input{
+        font-size: 15px;
+        padding: 10px;
+
+      }
+
+      .Calculate{
+        background-color: green;
+        color: white;
+        border: none;
+        font-size: 15px;
+        padding: 12px 30px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Amazon Shipping Calculator</h1>
+
+    <input type="number" placeholder="Order Cost" id="input" onkeydown="enter(event)" class="cost-input">
+    <button onclick="Calculate()" class="Calculate">Calculate</button>
+    <p id="rate"></p>
+    <script>
+      function Calculate(){
+        order_val = Number(document.getElementById("input").value);
+        console.log(order_val);
+        rate = document.getElementById("rate");
+        if(order_val < 40){
+          order_val += 10;
+          rate.innerHTML = `$${order_val}`;
+        }else{
+          rate.innerHTML = `$${order_val}`;
+        }
+
+      }
+      function enter(event){
+        if(event.key ==='Enter'){
+          Calculate();
+        }
+      }
+    </script>
+  </body>
+</html>
