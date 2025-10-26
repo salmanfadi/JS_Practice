@@ -11,14 +11,15 @@ document.querySelector(".js-add-button").addEventListener("click",()=>{
 
     const id = `task-${Date.now()}`;
 
-    html = `
-    <div id="${id}">
-        <div>${taskValue}</div>
-        <div>${dueDateValue}</div>
-        <button class="js-delete-button delete-todo-button" onclick="Delete('${id}')">Delete</button>
-    </div>`;
+    const todoDiv = document.createElement('div');
+    todoDiv.id = id;
+    todoDiv.innerHTML = `
+      <div>${taskValue}</div>
+      <div>${dueDateValue}</div>
+      <button class="js-delete-button delete-todo-button" onclick="Delete('${id}')">Delete</button>
+    `;
 
-    document.querySelector('.to-do-list').innerHTML += html; 
+    document.querySelector('.to-do-list').appendChild(todoDiv); 
 
     task.value = '';
     dueDate.value = '';
